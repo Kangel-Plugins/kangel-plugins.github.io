@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fdf8fd">
+    <meta name="description" content="Правила публикации плагинов в Kangel Plugins Manager.">
+    <title>KPM — Правила публикации</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <header class="top-bar">
+        <div class="top-bar-inner">
+          <a class="brand" href="#top"><span class="brand-icon">K</span><span>Kangel Plugins Manager</span></a>
+          <div class="controls"><div class="theme-controls" role="group" :aria-label="t.themeLabel">
+            <md-filled-tonal-icon-button v-for="choice in [{ id: 'light', icon: 'sun' }, { id: 'dark', icon: 'moon' }, { id: 'system', icon: 'laptop' }]" :key="choice.id" toggle :selected="theme === choice.id" :aria-label="t[choice.id]" :title="t[choice.id]" @click="setTheme(choice.id)"><i :class="['hn', 'hn-' + choice.icon]" aria-hidden="true"></i></md-filled-tonal-icon-button>
+          </div><div class="language" role="group" :aria-label="t.language">
+            <template v-for="item in ['ru', 'en']" :key="item">
+              <md-filled-tonal-button v-if="locale === item" :aria-pressed="true" @click="setLocale(item)">{{ item.toUpperCase() }}</md-filled-tonal-button>
+              <md-text-button v-else :aria-pressed="false" @click="setLocale(item)">{{ item.toUpperCase() }}</md-text-button>
+            </template>
+          </div></div>
+        </div>
+      </header>
+
+      <main id="top" class="container">
+        <section class="hero">
+          <span class="eyebrow">{{ t.eyebrow }}</span>
+          <h1>{{ t.title }}<br>{{ t.titleAccent }}.</h1>
+          <p>{{ t.subtitle }}</p>
+          <md-filled-button href="#rules"><i slot="icon" class="hn hn-arrow-down" aria-hidden="true"></i>{{ t.explore }}</md-filled-button>
+        </section>
+
+        <section class="intro surface">
+          <span class="eyebrow">{{ t.introLabel }}</span>
+          <h2>{{ t.introTitle }}</h2>
+          <p v-for="paragraph in t.intro" :key="paragraph">{{ paragraph }}</p>
+        </section>
+
+        <div id="rules" class="rules-layout">
+          <nav class="contents surface" :aria-label="t.contents">
+            <h2>{{ t.contents }}</h2>
+            <md-list>
+              <md-list-item v-for="(section, index) in t.sections" :key="section.id" type="link" :href="'#' + section.id">
+                <span slot="start" class="nav-number">0{{ index + 1 }}</span>
+                <span slot="headline">{{ section.title }}</span>
+              </md-list-item>
+            </md-list>
+          </nav>
+          <div class="sections">
+            <section v-for="(section, sectionIndex) in t.sections" :id="section.id" :key="section.id" class="rules-section surface">
+              <div class="section-heading"><div><span class="eyebrow">{{ t.part }} 0{{ sectionIndex + 1 }} / 03</span><h2>{{ section.title }}</h2></div><i :class="['section-symbol', 'hn', ['hn-lock', 'hn-code', 'hn-info-circle'][sectionIndex]]" aria-hidden="true"></i></div>
+              <ol><li v-for="(rule, index) in section.rules" :key="index"><span class="rule-number">{{ index + 1 }}</span><p>{{ rule }}</p></li></ol>
+            </section>
+          </div>
+        </div>
+
+      </main>
+      <footer class="container footer"><div><span>© Kangel Plugins Manager</span><small>Icons: <a href="https://github.com/hackernoon/pixel-icon-library">HackerNoon Pixel Icon Library</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · unmodified</small></div><md-text-button href="#top"><i slot="icon" class="hn hn-arrow-up" aria-hidden="true"></i>{{ t.back }}</md-text-button></footer>
+    </div>
+    <noscript>Для работы страницы нужен JavaScript. / JavaScript is required to view this page.</noscript>
+  </body>
+</html>
