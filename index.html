@@ -11,12 +11,13 @@
   </head>
   <body>
     <div id="app" v-cloak>
+      <template v-if="ui === 'md3'">
       <header class="top-bar">
         <div class="top-bar-inner">
           <a class="brand" href="#top"><span class="brand-icon">K</span><span>Kangel Plugins Manager</span></a>
           <div class="controls"><div class="theme-controls" role="group" :aria-label="t.themeLabel">
             <md-filled-tonal-icon-button v-for="choice in [{ id: 'light', icon: 'sun' }, { id: 'dark', icon: 'moon' }, { id: 'system', icon: 'laptop' }]" :key="choice.id" toggle :selected="theme === choice.id" :aria-label="t[choice.id]" :title="t[choice.id]" @click="setTheme(choice.id)"><i :class="['hn', 'hn-' + choice.icon]" aria-hidden="true"></i></md-filled-tonal-icon-button>
-          </div><div class="language" role="group" :aria-label="t.language">
+          </div><md-outlined-button @click="setUi('needy')" :aria-label="t.switchUi">Needy UI</md-outlined-button><div class="language" role="group" :aria-label="t.language">
             <template v-for="item in ['ru', 'en']" :key="item">
               <md-filled-tonal-button v-if="locale === item" :aria-pressed="true" @click="setLocale(item)">{{ item.toUpperCase() }}</md-filled-tonal-button>
               <md-text-button v-else :aria-pressed="false" @click="setLocale(item)">{{ item.toUpperCase() }}</md-text-button>
@@ -59,6 +60,21 @@
 
       </main>
       <footer class="container footer"><div><span>© Kangel Plugins Manager</span><small>Icons: <a href="https://github.com/hackernoon/pixel-icon-library">HackerNoon Pixel Icon Library</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · unmodified</small></div><md-text-button href="#top"><i slot="icon" class="hn hn-arrow-up" aria-hidden="true"></i>{{ t.back }}</md-text-button></footer>
+      </template>
+      <div v-else class="needy-page" :class="effectiveDark ? 'nightbg' : 'noonbg'">
+        <div class="needy-wrap">
+          <div class="profile"><div class="table-section"><div class="heading nso-titlebar"><span class="nso-titlebar__icon"></span><h4>KANGEL PLUGINS MANAGER</h4></div><div class="inner needy-controls">
+            <button class="nso-btn" @click="setUi('md3')">Material Design 3</button>
+            <button v-for="choice in ['light', 'dark', 'system']" :key="choice" class="nso-btn" :class="{'nso-btn--primary': theme === choice}" :aria-pressed="theme === choice" @click="setTheme(choice)">{{ t[choice] }}</button>
+            <button v-for="item in ['ru', 'en']" :key="item" class="nso-btn" :class="{'nso-btn--primary': locale === item}" :aria-pressed="locale === item" @click="setLocale(item)">{{ item.toUpperCase() }}</button>
+          </div></div></div>
+          <div class="profile"><div class="table-section"><div class="heading nso-titlebar"><span class="nso-titlebar__icon"></span><h4>{{ t.header }}</h4></div><div class="inner needy-content"><h1>{{ t.title }}<br>{{ t.titleAccent }}.</h1><p>{{ t.subtitle }}</p><a class="nso-btn" href="#needy-rules">{{ t.explore }} ↓</a></div></div></div>
+          <div class="profile"><div class="table-section"><div class="heading nso-titlebar"><span class="nso-titlebar__icon"></span><h4>{{ t.introLabel }}</h4></div><div class="inner needy-content"><h2>{{ t.introTitle }}</h2><p v-for="paragraph in t.intro" :key="paragraph">{{ paragraph }}</p></div></div></div>
+          <nav id="needy-rules" class="needy-nav" :aria-label="t.contents"><button v-for="section in t.sections" :key="section.id" type="button" class="nso-btn" @click="scrollToSection(section.id)">{{ section.title }}</button></nav>
+          <section v-for="(section, sectionIndex) in t.sections" :id="'needy-' + section.id" :key="section.id" class="profile"><div class="table-section"><div class="heading nso-titlebar"><span class="nso-titlebar__icon"></span><h4>{{ t.part }} {{ sectionIndex + 1 }} — {{ section.title }}</h4></div><div class="inner needy-content"><ol class="needy-rules"><li v-for="(rule, index) in section.rules" :key="index"><span class="needy-number">{{ index + 1 }}.</span><p>{{ rule }}</p></li></ol></div></div></section>
+          <footer class="profile"><div class="table-section"><div class="heading nso-titlebar"><span class="nso-titlebar__icon"></span><h4>Footer</h4><span class="nso-titlebar__buttons" aria-hidden="true"><i></i><i></i><i></i></span></div><div class="inner needy-footer">© Kangel Plugins Manager · <a href="https://github.com/ArThirtyFour/NeedyWebUI">NeedyWebUI</a> · Icons: <a href="https://github.com/hackernoon/pixel-icon-library">HackerNoon</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · unmodified</div></div></footer>
+        </div>
+      </div>
     </div>
     <noscript>Для работы страницы нужен JavaScript. / JavaScript is required to view this page.</noscript>
   </body>

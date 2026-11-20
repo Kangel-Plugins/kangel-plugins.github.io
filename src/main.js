@@ -16,7 +16,9 @@ const app = createApp({
       const saved = localStorage.getItem('kpm-theme')
       if (['light', 'dark', 'system'].includes(saved)) theme = saved
     } catch { /* Storage can be unavailable in private browsing. */ }
-    return { locale: navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en', theme }
+    let ui = 'md3'
+    try { if (localStorage.getItem('kpm-ui') === 'needy') ui = 'needy' } catch { /* Storage is optional. */ }
+    return { locale: navigator.language.toLowerCase().startsWith('ru') ? 'ru' : 'en', theme, ui, effectiveDark: false }
   },
   computed: {
     t() { return translations[this.locale] },
@@ -24,6 +26,7 @@ const app = createApp({
   mounted() {
     this.setLocale(this.locale)
     this.applyTheme()
+    this.applyUi()
     this.colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
     this.onSchemeChange = () => this.applyTheme()
     this.colorScheme.addEventListener('change', this.onSchemeChange)
@@ -32,6 +35,9 @@ const app = createApp({
     this.colorScheme.removeEventListener('change', this.onSchemeChange)
   },
   methods: {
+    scrollToSection(id) {
+      document.getElementById('needy-' + id)?.scrollIntoView({ behavior: 'smooth' })
+    },
     setLocale(locale) {
       this.locale = locale
       document.documentElement.lang = locale
@@ -44,8 +50,26 @@ const app = createApp({
     },
     applyTheme() {
       const dark = this.theme === 'dark' || (this.theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      this.effectiveDark = dark
       document.documentElement.dataset.theme = dark ? 'dark' : 'light'
       document.querySelector('meta[name="theme-color"]').content = dark ? '#15121c' : '#fdf7ff'
+    },
+    setUi(ui) {
+      this.ui = ui
+      try { localStorage.setItem('kpm-ui', ui) } catch { /* Storage is optional. */ }
+      this.applyUi()
+    },
+    applyUi() {
+      let link = document.getElementById('needy-styles')
+      if (this.ui === 'needy' && !link) {
+        link = document.createElement('link')
+        link.id = 'needy-styles'
+        link.rel = 'stylesheet'
+        link.href = 'https://cdn.jsdelivr.net/gh/ArThirtyFour/NeedyWebUI@776d9b7a6d0765cda43f0456c50a57c48ea94a4e/nso_ui.css'
+        const firstStyle = document.head.querySelector('style, link[rel="stylesheet"]')
+        document.head.insertBefore(link, firstStyle)
+      }
+      if (link) link.disabled = this.ui !== 'needy'
     },
   },
 })

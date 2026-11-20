@@ -82,3 +82,22 @@ li p { font-size: 16px; line-height: 1.65; color: var(--text-muted); }
   .outro { align-items: flex-start; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } }
+.needy-page { width: 100%; min-height: 100vh; padding: 24px; }
+.needy-wrap { width: min(100%, 1120px); max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+.needy-wrap > .profile, .needy-wrap > .profile > .table-section { width: 100%; max-width: none; margin: 0; }
+.needy-wrap > footer.profile { border: 0; box-shadow: none; background: transparent; padding: 0; text-align: inherit; }
+.needy-wrap > footer.profile::before { content: none; }
+.needy-controls, .needy-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.needy-nav { width: 100%; padding: 4px 2px; }
+.needy-page nav.needy-nav { margin: 0; border: 0; box-shadow: none; background: transparent; }
+.needy-page nav.needy-nav::before { content: none; }
+.needy-page .nso-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; width: auto; margin: 0; line-height: 1.2; text-align: center; text-decoration: none; white-space: normal; }
+.needy-nav .nso-btn { flex: 0 1 auto; max-width: 100%; }
+.needy-content { padding: 24px !important; }
+.needy-content h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.15; }
+.needy-content h2 { font-size: 26px; }.needy-content p { margin: 14px 0; line-height: 1.7; }
+.needy-content .nso-btn { margin-top: 12px; }
+.needy-rules { margin: 0; padding: 0; }.needy-rules li { border-color: #90f3e1; }.needy-rules p { color: inherit; margin: 0; }.needy-number { font-weight: bold; }
+.needy-page .needy-footer { padding: 12px 16px; color: #1403a6; font: 16px/1.6 'dinkie9px', sans-serif; text-align: center; text-shadow: none; overflow-wrap: anywhere; }
+.needy-page .needy-footer a { color: #4d23cd; text-decoration: underline; }
+@media (max-width: 720px) { .needy-page { padding: 12px; }.needy-content { padding: 16px !important; }.needy-controls .nso-btn { flex: 1 1 auto; } }

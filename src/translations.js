@@ -1,6 +1,6 @@
 export const translations = {
   ru: {
-    header: 'ПРАВИЛА ПУБЛИКАЦИИ', language: 'Выбор языка', themeLabel: 'Тема оформления', light: 'Светлая', dark: 'Тёмная', system: 'Система', eyebrow: 'KPM / ДЛЯ АВТОРОВ ПЛАГИНОВ',
+    header: 'ПРАВИЛА ПУБЛИКАЦИИ', language: 'Выбор языка', switchUi: 'Переключить на Needy UI', themeLabel: 'Тема оформления', light: 'Светлая', dark: 'Тёмная', system: 'Система', eyebrow: 'KPM / ДЛЯ АВТОРОВ ПЛАГИНОВ',
     title: 'Хорошие плагины.', titleAccent: 'Честные правила', subtitle: 'Всё, что нужно знать перед публикацией плагина в Kangel Plugins Manager.', explore: 'К ПРАВИЛАМ', art: 'ОТКРЫТЫЙ КОД. ОТКРЫТОЕ СООБЩЕСТВО.',
     introLabel: 'ПРЕАМБУЛА', introTitle: 'Сначала немного контекста.', intro: ['Маленькая преамбула, на которую всем похуй в 99% случаев:', 'Репозитории KPM всегда были и будут полностью OSS. Весь исходный код плагинов открыт, любой желающий может зайти и посмотреть.', 'Ну а теперь к правилам. Как подавать плагин, вы и так в курсе, не глупые.'],
     contents: 'СОДЕРЖАНИЕ', sideNote: 'НЕ МНОГО БУКВ.\nНО ВАЖНЫЕ.', part: 'ЧАСТЬ',
@@ -30,7 +30,7 @@ export const translations = {
     outroLabel: 'ВОТ И ВСЁ', outroTitle: 'Спасибо, что прочитали', outroText: 'Оригинал и обновления правил — в Telegram.', source: 'ОТКРЫТЬ В TELEGRAM', footer: 'СДЕЛАНО ДЛЯ СООБЩЕСТВА', back: 'НАВЕРХ',
   },
   en: {
-    header: 'PUBLISHING RULES', language: 'Choose language', themeLabel: 'Color theme', light: 'Light', dark: 'Dark', system: 'System', eyebrow: 'KPM / FOR PLUGIN AUTHORS',
+    header: 'PUBLISHING RULES', language: 'Choose language', switchUi: 'Switch to Needy UI', themeLabel: 'Color theme', light: 'Light', dark: 'Dark', system: 'System', eyebrow: 'KPM / FOR PLUGIN AUTHORS',
     title: 'Good plugins.', titleAccent: 'Honest rules', subtitle: 'Everything you need to know before publishing a plugin in Kangel Plugins Manager.', explore: 'EXPLORE THE RULES', art: 'OPEN SOURCE. OPEN COMMUNITY.',
     introLabel: 'THE PREAMBLE', introTitle: 'First, a little context.', intro: ["A little preamble that 99% of people won't give a fuck about.", 'KPM repositories have always been and will always remain fully OSS (Open Source Software). This means that every plugin must include its complete source code, allowing anyone to inspect and review it.', "Now, onto the publishing rules. You already know how to submit a plugin, so let's get straight to the point."],
     contents: 'CONTENTS', sideNote: 'NOT MANY WORDS.\nBUT IMPORTANT ONES.', part: 'PART',
